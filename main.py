@@ -1,11 +1,12 @@
-from typing import Union
-
+import os
 from fastapi import FastAPI
+from dotenv import load_dotenv
 
+load_dotenv("./.env")
 app = FastAPI()
 
 # Version of api
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def version_printing():
+    return {"veriosn":os.getenv("API_VERSION",default="v0.0.1")}
 
