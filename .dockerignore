@@ -1,0 +1,8 @@
+__pycache__
+include
+Lib
+Scripts
+.env
+.gitigonre
+Dockerfile
+pyvenv.cfg
