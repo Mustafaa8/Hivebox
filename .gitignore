@@ -1,6 +1,7 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
 Lib/
-Lib64/
+Lib64
+lib64/
 bin
 
 Scripts
