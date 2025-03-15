@@ -16,12 +16,15 @@ jobs:
         with:
           python-version: "3.12"
       - name: install dependancies
-        run: pip install -r requirements.txt
+        run: | 
+          pip install -r requirements.txt
+          pip install pytest
       - name: unit testing
         run: pytest tests/*
   linting:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: installing PyLint
         run: pip install pylint
       - name: linting the code
