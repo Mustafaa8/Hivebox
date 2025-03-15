@@ -1,3 +1,4 @@
+"""Main Router for the api"""
 from fastapi import APIRouter
 from app.config.settings import settings
 import requests
