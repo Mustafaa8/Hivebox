@@ -1,0 +1,28 @@
+name: Hivebox CI
+
+on: 
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  
+  unit_testing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5.4.0
+        with:
+          python-version: "3.12"
+      - name: install dependancies
+        run: pip install -r requirements.txt
+      - name: unit testing
+        run: pytest tests/*
+  linting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: installing PyLint
+        run: pip install pylint
+      - name: linting the code
+        run: pylint $(git ls-files '*.py')
