@@ -11,7 +11,7 @@ def version_printing():
     """
     Printing the version of the api
     """
-    return {"veriosn":settings.VERSION}
+    return {"version":settings.VERSION}
 
 @router.get("/temperature")
 def get_average_temperature():

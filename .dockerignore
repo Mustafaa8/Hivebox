@@ -1,8 +1,14 @@
-__pycache__
+**/__pycache__
+bin
 include
-Lib
+lib
+lib64
 Scripts
+
 .env
 .gitigonre
+.pytest_cache
+
+tests
 Dockerfile
 pyvenv.cfg
