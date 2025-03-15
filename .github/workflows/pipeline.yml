@@ -21,11 +21,30 @@ jobs:
           pip install pytest
       - name: unit testing
         run: pytest tests/*
-  linting:
+  Pylinting:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: install dependancies
+        run: | 
+          pip install -r requirements.txt
       - name: installing PyLint
         run: pip install pylint
       - name: linting the code
         run: pylint $(git ls-files '*.py')
+  Hadolinting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: linting Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ./Dockerfile
+  Dockerizing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Building Docker Image
+        run: |
+          docker build -t hivebox:latest .
+          
