@@ -4,6 +4,9 @@ from app.config.settings import settings
 import requests
 from datetime import datetime , timezone , timedelta
 import numpy as np
+from prometheus_client import CollectorRegistry , generate_latest , CONTENT_TYPE_LATEST
+from starlette.responses import Response
+
 
 router = APIRouter()
 
@@ -42,4 +45,15 @@ def get_average_temperature():
                 pass
             else:
                 reads.append(sensor[key])
-    return {"The average Temperature of the SenseBoxes":np.mean(reads)}
+    reads_mean = np.mean(reads)
+    if reads_mean <= 10 :
+        reads_status = "Too Cold"
+    elif (reads_mean > 11 & reads_mean <= 36):
+        reads_status = "Good"
+    else:
+        reads_status = "Too Hot"
+    return {"The average Temperature of the SenseBoxes":reads_mean,"The Status of temperature":reads_status}
+
+@router.get('/metrics')
+def prom_defualt_metrics():
+    return Response(content=generate_latest(), media_type=CONTENT_TYPE_LATEST)
