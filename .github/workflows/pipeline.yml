@@ -64,3 +64,15 @@ jobs:
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push ${{ secrets.DOCKER_USERNAME }}/hivebox:latest
           docker logout
+  Trivy_image_scanning:
+    runs-on: ubuntu-latest
+    needs: Dockerizing
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: installing trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
+      - name: scanning the image
+        run: |
+          trivy image ${{ secrets.DOCKER_USERNAME }}/hivebox:latest
+          
