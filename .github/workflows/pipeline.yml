@@ -37,8 +37,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: running semgrep to scan code
-        uses: r7kamura/semgrepper@v0.1.0
+      - name: installing trivy
+        uses: aquasecurity/setup-trivy@v0.2.2
+      - name: code scanning
+        run: |
+          trivy fs --scanners vuln,secret,misconfig ./ > ./fs_report.txt
+          cat fs_report.txt
   Hadolinting:
     runs-on: ubuntu-latest
     steps:
