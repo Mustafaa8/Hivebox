@@ -39,8 +39,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: running sonarqube to scan code
         uses: SonarSource/sonarcloud-github-action@ffc3010689be73b8e5ae0c57ce35968afd7909e8
-        with:
-          projectBaseDir: ./app
       - name: checking if sonarqube passed or not
         uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
   Hadolinting:
