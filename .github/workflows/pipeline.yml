@@ -74,5 +74,5 @@ jobs:
         uses: aquasecurity/setup-trivy@v0.2.2
       - name: scanning the image
         run: |
-          trivy image ${{ secrets.DOCKER_USERNAME }}/hivebox:latest
+          trivy image --severity HIGH,CRITICAL ${{ secrets.DOCKER_USERNAME }}/hivebox:latest
           
