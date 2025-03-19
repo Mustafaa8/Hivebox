@@ -48,7 +48,7 @@ def get_average_temperature():
     reads_mean = np.mean(reads)
     if reads_mean <= 10 :
         reads_status = "Too Cold"
-    elif (reads_mean > 11 & reads_mean <= 36):
+    elif (reads_mean > 11 and reads_mean <= 36):
         reads_status = "Good"
     else:
         reads_status = "Too Hot"
