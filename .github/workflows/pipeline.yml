@@ -33,14 +33,12 @@ jobs:
         run: pip install pylint
       - name: linting the code
         run: pylint $(git ls-files '*.py')
-  Sonarqube_code_analysis:
+  Code_analysis:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: running sonarqube to scan code
-        uses: SonarSource/sonarcloud-github-action@ffc3010689be73b8e5ae0c57ce35968afd7909e8
-      - name: checking if sonarqube passed or not
-        uses: SonarSource/sonarqube-quality-gate-action@v1.1.0
+      - name: running semgrep to scan code
+        uses: r7kamura/semgrepper@v0.1.0
   Hadolinting:
     runs-on: ubuntu-latest
     steps:
