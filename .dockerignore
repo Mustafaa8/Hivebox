@@ -1,4 +1,7 @@
 **/__pycache__
+
+.github
+
 bin
 include
 lib
@@ -12,3 +15,5 @@ Scripts
 tests
 Dockerfile
 pyvenv.cfg
+
+kubernetes
