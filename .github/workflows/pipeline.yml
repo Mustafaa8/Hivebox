@@ -52,6 +52,20 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ./Dockerfile
+  Trivy_config_scanning:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: 'config'
+          hide-progress: true
+          format: 'sarif'
+          output: 'trivy-config-results.sarif'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+          
   Dockerizing:
     runs-on: ubuntu-latest
     needs: Hadolinting
@@ -64,15 +78,18 @@ jobs:
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login --username ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push ${{ secrets.DOCKER_USERNAME }}/hivebox:latest
           docker logout
+          
   Trivy_image_scanning:
     runs-on: ubuntu-latest
     needs: Dockerizing
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
-      - name: installing trivy
-        uses: aquasecurity/setup-trivy@v0.2.2
-      - name: scanning the image
-        run: |
-          trivy image --severity HIGH,CRITICAL ${{ secrets.DOCKER_USERNAME }}/hivebox:latest
-          
+      - uses: aquasecurity/trivy-action@0.30.0
+        with:
+          scan-type: 'image'
+          image-ref: '${{ secrets.DOCKER_USERNAME }}/hivebox:latest'
+          format: 'sarif'
+          output: 'trivy-image-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
