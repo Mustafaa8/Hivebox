@@ -60,7 +60,6 @@ jobs:
       - uses: aquasecurity/trivy-action@0.30.0
         with:
           scan-type: 'fs'
-          scanner: 'misconfig'
           severity: 'CRITICAL,HIGH'
 
           
