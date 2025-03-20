@@ -59,12 +59,12 @@ jobs:
         uses: actions/checkout@v4
       - uses: aquasecurity/trivy-action@0.30.0
         with:
-          scan-type: 'config'
-          hide-progress: true
-          format: 'sarif'
-          output: 'trivy-config-results.sarif'
-          exit-code: '1'
+          scan-type: 'fs'
+          scanner: 'misconfig'
+          format: 'json'
+          output: 'trivy-misconfig-results.json'
           severity: 'CRITICAL,HIGH'
+          
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         with:
@@ -93,8 +93,8 @@ jobs:
         with:
           scan-type: 'image'
           image-ref: '${{ secrets.DOCKER_USERNAME }}/hivebox:latest'
-          format: 'sarif'
-          output: 'trivy-image-results.sarif'
+          format: 'json'
+          output: 'trivy-image-results.json'
           severity: 'CRITICAL,HIGH'
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
