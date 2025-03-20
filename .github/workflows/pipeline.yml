@@ -61,14 +61,8 @@ jobs:
         with:
           scan-type: 'fs'
           scanner: 'misconfig'
-          format: 'json'
-          output: 'trivy-misconfig-results.json'
           severity: 'CRITICAL,HIGH'
-          
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-config-results.json'
+
           
   Dockerizing:
     runs-on: ubuntu-latest
@@ -93,10 +87,4 @@ jobs:
         with:
           scan-type: 'image'
           image-ref: '${{ secrets.DOCKER_USERNAME }}/hivebox:latest'
-          format: 'json'
-          output: 'trivy-image-results.json'
           severity: 'CRITICAL,HIGH'
-      - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-image-results.json'
