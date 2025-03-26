@@ -1,0 +1,17 @@
+version: '3'
+services:
+  api:
+    image: mostafaa8/hivebox:latest
+    restart: always
+    ports:
+      - "8000:8000"
+
+  prom:
+    image: prom/prometheus
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    depends_on: 
+      - api
