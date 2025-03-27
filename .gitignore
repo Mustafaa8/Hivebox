@@ -1,8 +1,8 @@
 # Created by venv; see https://docs.python.org/3/library/venv.html
-Lib/
-Lib64
+lib/
+lib64
 lib64/
-bin
+bin/
 
 Scripts
 
