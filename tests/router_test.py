@@ -13,3 +13,5 @@ def test_temperature():
     response = client.get("/temperature")
     assert response.status_code == 200
     isinstance(response.json().values(),float)
+
+
